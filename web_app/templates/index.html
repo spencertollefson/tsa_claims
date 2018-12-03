@@ -1,0 +1,58 @@
+<html>
+
+<body>
+This is the TSA claim predictor
+
+Gender:
+  <select>
+    <option value="M">Male</option>
+    <option value="F">Female</option>
+  </select>
+
+  <div>
+    <button id="submit">Make prediction</button>
+  </div>
+Our prediction is:
+  <table>
+    <tr><td>You will</td><td id="hard_predict"></td></tr>
+    <tr><td>Probability</td><td id="soft_predict"></td></tr>
+  </table>
+
+</body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>
+
+  $('#submit').click( () => { cool(); } );
+  
+  function cool(){
+    let features = {
+      'Pclass': 3,
+      'Sex': $('select').val(),
+      'Age': 22,
+      'SibSp': 1,
+      'Parch': 0,
+      'Fare': 7.25
+    }
+    console.log(features);
+
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      url: "/predict",  // Replace with URL of POST handler
+      dataType: "json",
+      async: true,
+      data: JSON.stringify(features),
+      success: (result) => {
+        $('#hard_predict').html(result['prediction'] ? 'survived' : 'not survived' );
+        $('#soft_predict').html(result['prob_survived']);
+      },
+      error: (result) => {
+        alert('I dunno what you did');
+      }
+    })
+
+  }
+
+  </script>
+
+</html>
