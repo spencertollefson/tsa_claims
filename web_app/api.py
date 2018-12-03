@@ -1,10 +1,11 @@
 import numpy as np
-import pickle
+import pandas as pd
 import joblib
+import pickle
 from sklearn.preprocessing import StandardScaler, MultiLabelBinarizer, OneHotEncoder
 
 
-model = joblib.load(open('./models/rf_full_month_rec', 'rb'))
+model = joblib.load(open('./stat_models/rf_full_month_rec.joblib', 'rb'))
 
 example = {
   'airport_code': 'SEA',  # str

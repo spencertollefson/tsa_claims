@@ -2,12 +2,38 @@
 
 <body>
 This is the TSA claim predictor
+<br>
 
-Gender:
+Airport:
   <select>
-    <option value="M">Male</option>
-    <option value="F">Female</option>
+    <option value= "{{airportlist}}" SELECTED>{{ airportlist }}</option>"
   </select>
+
+Airline:
+  <select>
+    <option value= "{{airlinelist}}" SELECTED>{{ airlinelist }}</option>"
+  </select>
+
+Claim Type:
+  <select>
+    <option value= "{{claim_typelist}}" SELECTED>{{ claim_typelist }}</option>"
+  </select>
+
+Location of Incident:
+  <select>
+    <option value= "{{claim_sitelist}}" SELECTED>{{ claim_sitelist }}</option>"
+  </select>
+
+Item Category:
+  <select>
+    <option value= "{{item_catlist}}" SELECTED>{{ item_catlist }}</option>"
+  </select>
+
+Month:
+  <select>
+    <option value= "{{monthlist}}" SELECTED>{{ monthlist }}</option>"
+  </select>
+
 
   <div>
     <button id="submit">Make prediction</button>
