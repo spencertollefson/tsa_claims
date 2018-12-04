@@ -3,9 +3,9 @@ import pandas as pd
 import joblib
 import pickle
 from sklearn.preprocessing import StandardScaler, MultiLabelBinarizer, OneHotEncoder
+from sklearn.ensemble import RandomForestClassifier
 
-
-model = joblib.load(open('./stat_models/rf_full_month_rec.joblib', 'rb'))
+model = joblib.load(open('./stat_models/rf_months_12.03.2018.joblib', 'rb'))
 
 example = {
   'airport_code': 'SEA',  # str
@@ -14,8 +14,8 @@ example = {
   'claim_site': 'Checkpoint',  # str
   'item_category': 'Clothing',  # str
   'num_items_or_incidents_claimed': 1,  # int
-  'days_waited_to_file_claim': 7, # int
-  'Month_received': 1, # int (1-12)
+  'days_waited_to_file_claim': 7,  # int
+  'Month_received': '1'  # int (1-12)
 }
 
 
@@ -29,7 +29,7 @@ def make_prediction(features):
     categorical = ['airport_code', 'airline', 'claim_type', 'claim_site', 'Month_received']
     continuous = ['days_waited_to_file_claim', 'num_items_or_incidents_claimed']
 
-    trans_dir = './models/transformers'
+    trans_dir = './stat_models/transformers'
     enc = joblib.load(f'{trans_dir}/onehotencode.joblib')
     onehotarray = enc.transform(X[categorical])
 

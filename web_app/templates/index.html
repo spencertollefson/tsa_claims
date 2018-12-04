@@ -5,35 +5,53 @@ This is the TSA claim predictor
 <br>
 
 Airport:
-  <select>
-    <option value= "{{airportlist}}" SELECTED>{{ airportlist }}</option>"
+  <select name = airports method="GET" action="/">
+      {% for airport in airports %}
+      <option value= "{{airport}}" SELECTED>{{ airport }}</option>"
+      {% endfor %}
   </select>
 
+<br>
 Airline:
-  <select>
-    <option value= "{{airlinelist}}" SELECTED>{{ airlinelist }}</option>"
+  <select name = airlines method="GET" action="/">
+      {% for airline in airlines %}
+      <option value= "{{airline}}" SELECTED>{{ airline }}</option>"
+      {% endfor %}
   </select>
+<br>
 
 Claim Type:
-  <select>
-    <option value= "{{claim_typelist}}" SELECTED>{{ claim_typelist }}</option>"
+  <select name = claim_types method="GET" action="/">
+      {% for claim_type in claim_types %}
+      <option value= "{{claim_type}}" SELECTED>{{ claim_type }}</option>"
+      {% endfor %}
   </select>
+<br>
 
 Location of Incident:
-  <select>
-    <option value= "{{claim_sitelist}}" SELECTED>{{ claim_sitelist }}</option>"
+  <select name = claim_sites method="GET" action="/">
+      {% for claim_site in claim_sites %}
+      <option value= "{{claim_site}}" SELECTED>{{ claim_site }}</option>"
+      {% endfor %}
   </select>
+<br>
 
 Item Category:
-  <select>
-    <option value= "{{item_catlist}}" SELECTED>{{ item_catlist }}</option>"
+  <select name = item_cats method="GET" action="/">
+      {% for item_cat in item_cats %}
+      <option value= "{{item_cat}}" SELECTED>{{ item_cat }}</option>"
+      {% endfor %}
   </select>
+<br>
 
 Month:
-  <select>
-    <option value= "{{monthlist}}" SELECTED>{{ monthlist }}</option>"
+  <select name = months method="GET" action="/">
+      {% for month in months %}
+      <option value= "{{month}}" SELECTED>{{ month }}</option>"
+      {% endfor %}
   </select>
 
+<br>
 
   <div>
     <button id="submit">Make prediction</button>
@@ -52,12 +70,14 @@ Our prediction is:
   
   function cool(){
     let features = {
-      'Pclass': 3,
-      'Sex': $('select').val(),
-      'Age': 22,
-      'SibSp': 1,
-      'Parch': 0,
-      'Fare': 7.25
+      'airport_code': $('select[name=airports]').val(),
+      'airline': $('select[name=airlines]').val(),
+      'claim_type': $('select[name=claim_types]').val(),
+      'claim_site': $('select[name=claim_sites]').val(),
+      'item_category': $('select[name=item_cats]').val(),
+      'num_items_or_incidents_claimed': 1,
+      'days_waited_to_file_claim': 10,
+      'Month_received': $('select[name=months]').val()
     }
     console.log(features);
 
@@ -69,8 +89,8 @@ Our prediction is:
       async: true,
       data: JSON.stringify(features),
       success: (result) => {
-        $('#hard_predict').html(result['prediction'] ? 'survived' : 'not survived' );
-        $('#soft_predict').html(result['prob_survived']);
+        $('#hard_predict').html(result['compensation'] ? 'COMPENSATED!' : 'not compensated' );
+        $('#soft_predict').html(result['prob_receive_compensation']);
       },
       error: (result) => {
         alert('I dunno what you did');
