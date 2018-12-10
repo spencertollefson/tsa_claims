@@ -6,8 +6,6 @@ Proposal for Final Project
 
 # Estimate Refund amount for Claim made to TSA
 
-## * (Alternate idea: estimate probability of losing an item at TSA and/or with airline baggage handlers. Basically estimate likelihood of haing a baggage issue at some point on a flight)
-
 ## Introduction
 
 The Transportation Security Administration was created in 20XX, largely motivated as a change in flight security policy post the September 11, 2001, attacks. Passing through TSA checkpoints has been routine and ubiquitous in all United States airports since then, as every of the millions of US passengers that fly daily must be checked at a TSA security screening since then.

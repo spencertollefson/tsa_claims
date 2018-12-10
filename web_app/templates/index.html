@@ -1,7 +1,14 @@
 <html>
+<head><title>TSA CLAIM PREDICTOR</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js">script></script>
+</head>
+
 
 <body>
-This is the TSA claim predictor
+<h1>TSA CLAIM PREDICTOR</h1>
 <br>
 
 Airport:
@@ -44,26 +51,44 @@ Item Category:
   </select>
 <br>
 
-Month:
+Month of incident date:
   <select name = months method="GET" action="/">
       {% for month in months %}
       <option value= "{{month}}" SELECTED>{{ month }}</option>"
       {% endfor %}
   </select>
 
+
 <br>
 
   <div>
     <button id="submit">Make prediction</button>
-  </div>
-Our prediction is:
-  <table>
-    <tr><td>You will</td><td id="hard_predict"></td></tr>
-    <tr><td>Probability</td><td id="soft_predict"></td></tr>
+      <table>
+    <tr><td>Probability is: </td>
+        <td id="hard_predict"></td></tr>
   </table>
+  </div>
+<br>
+
+
+<div class="charts text-center">
+        <div class="row"><div id="line"></div></div><hr>
+        <!-- Placeholder for the tooltip -->
+        <div id="vis-tooltip" class="vg-tooltip"></div>
+</div>
 
 </body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.30/vega.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.2/vega-lite.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.14/vega-embed.js"></script>
+
+    <script src="https://vega.github.io/datalib/datalib.min.js"></script>
+
+    <!-- Vega Tooltip -->
+    <script src="https://vega.github.io/vega-tooltip/vega-tooltip.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://vega.github.io/vega-tooltip/vega-tooltip.css">
   <script>
 
   $('#submit').click( () => { cool(); } );
@@ -75,11 +100,16 @@ Our prediction is:
       'claim_type': $('select[name=claim_types]').val(),
       'claim_site': $('select[name=claim_sites]').val(),
       'item_category': $('select[name=item_cats]').val(),
-      'num_items_or_incidents_claimed': 1,
-      'days_waited_to_file_claim': 10,
-      'Month_received': $('select[name=months]').val()
+      'days_waited_to_file_claim': '3',
+      'Month_inc_date': $('select[name=months]').val()
     }
     console.log(features);
+
+     {#var opt = {#}
+     {#     mode: "vega-lite",#}
+     {#     renderer: "svg",#}
+     {#     actions: {export: true, source: false, editor: false}#}
+     {#   };#}
 
     $.ajax({
       type: "POST",
@@ -89,8 +119,7 @@ Our prediction is:
       async: true,
       data: JSON.stringify(features),
       success: (result) => {
-        $('#hard_predict').html(result['compensation'] ? 'COMPENSATED!' : 'not compensated' );
-        $('#soft_predict').html(result['prob_receive_compensation']);
+        $('#hard_predict').html(result);
       },
       error: (result) => {
         alert('I dunno what you did');
@@ -100,5 +129,26 @@ Our prediction is:
   }
 
   </script>
+
+
+
+
+{##}
+{#<!-- Render Charts -->#}
+{#    <script type="text/javascript">#}
+{#      function parse(url, div) {#}
+{#        var opt = {#}
+{#          mode: "vega-lite",#}
+{#          renderer: "svg",#}
+{#          actions: {export: true, source: false, editor: false}#}
+{#        };#}
+{#        vega.embed("#"+div, url, opt, function(error, result) {#}
+{#          // result.view is the Vega View, url is the original Vega-Lite specification#}
+{#          vegaTooltip.vegaLite(result.view, url);#}
+{#        });#}
+{#      }#}
+{##}
+{#      parse("/data/line", "line");#}
+{#    </script>#}
 
 </html>
