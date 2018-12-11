@@ -65,7 +65,7 @@ def make_prediction_over_n_days(features, n_days):
     result_array = np.array(results)
     max_index = np.argmax(result_array)
 
-    max_prob = str(round(result_array[max_index], 3) * 100) + '%'
+    max_prob = str(round(result_array[max_index], 3) * 100)[:4] + '%'
 
     response = {
         'max_prob': max_prob,

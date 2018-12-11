@@ -2,9 +2,7 @@
 <head>
   <title>TSA Claim Outcome Prediction</title>
    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
+    
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
 
 
@@ -67,6 +65,18 @@
         </td>
     </tr>
     <tr>
+      <td>
+          <div class="cat">Month Incident Occurred:</div>
+      </td>
+      <td>
+          <select class="dd" name = months method="GET" action="/">
+            {% for month in months %}
+            <option value= "{{month}}" SELECTED>{{ month }}</option>"
+            {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
         <td>
             <div class="cat">Item Category:</div>
         </td>
@@ -78,71 +88,8 @@
           </select>
         </td>
     </tr>
-    <tr>
-        <td>
-            <div class="cat">Month Incident Occurred:</div>
-        </td>
-        <td>
-            <select class="dd" name = months method="GET" action="/">
-              {% for month in months %}
-              <option value= "{{month}}" SELECTED>{{ month }}</option>"
-              {% endfor %}
-          </select>
-        </td>
-    </tr>
+
 </table>
-
-
-<!-- <div class="cat">Airport:</div>
-  <select name = airports method="GET" action="/">
-      {% for airport in airports %}
-      <option value= "{{airport}}" SELECTED>{{ airport }}</option>"
-      {% endfor %}
-  </select>
-
-<br>
-<div class="cat">Airline:</div> 
-  <select name = airlines method="GET" action="/">
-      {% for airline in airlines %}
-      <option value= "{{airline}}" SELECTED>{{ airline }}</option>"
-      {% endfor %}
-  </select>
-<br>
-
-
-<div class="cat">Claim Type:</div>
-  <select name = claim_types method="GET" action="/">
-      {% for claim_type in claim_types %}
-      <option value= "{{claim_type}}" SELECTED>{{ claim_type }}</option>"
-      {% endfor %}
-  </select>
-<br>
-
-
-<div class="cat">Location of Incident:</div>  
-  <select name = claim_sites method="GET" action="/">
-      {% for claim_site in claim_sites %}
-      <option value= "{{claim_site}}" SELECTED>{{ claim_site }}</option>"
-      {% endfor %}
-  </select>
-<br>
-
-
-<div class="cat">Item Category:</div>
-  <select name = item_cats method="GET" action="/">
-      {% for item_cat in item_cats %}
-      <option value= "{{item_cat}}" SELECTED>{{ item_cat }}</option>"
-      {% endfor %}
-  </select>
-<br>
-
-
-<div class="cat">Month Incident Occurred</div>
-  <select name = months method="GET" action="/">
-      {% for month in months %}
-      <option value= "{{month}}" SELECTED>{{ month }}</option>"
-      {% endfor %}
-  </select> -->
 
 <hr>
 <br>
@@ -168,11 +115,12 @@
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>  
-  <script src="https://vega.github.io/datalib/datalib.min.js"></script>
+  <!-- <script src="https://d3js.org/d3.v3.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@4.3.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.24.1"></script>
+
+  <!-- <script src="https://vega.github.io/datalib/datalib.min.js"></script> -->
   <script src="static/js/plot.js"></script>
 
   <script>
@@ -200,7 +148,7 @@
       data: JSON.stringify(features),
       success: (result) => processResult(result),
       error: (result) => {
-        alert('I dunno what you did');
+        alert('Error. Check the source code.');
       }
     });
 

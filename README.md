@@ -72,6 +72,7 @@ Learning JavaScript better and how to use that information with Python would hel
 `combine_and_clean_data.ipynb` | Inputs raw TSA Claims .csv files and performs cleaning and formatting. Saves files as .pkl in `/data/clean`.
 `pdf_to_csvs.ipynb` | Inputs the raw 2016 and 2017 data files from TSA that are in the PDF format and converts them into CSV files which are stored in `/data/raw`.
 `plot.ipynb` | Creates all plots used in presentation and blog post.
+`simple_models.ipynb` | Workhose notebook. Imports clean data, and executes then saves to disk various models and listings of categories
 `data/` | Directory contains raw and cleaned data.
 `images/` | Includes images and video used to represent data and demonstrate Flask app implementation
 `legacy` | Code that was used in early analysis to had down a few different paths, but ultimately not implemented in final models or plot s. This is messy and unfinished.

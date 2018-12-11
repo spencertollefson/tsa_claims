@@ -1,5 +1,5 @@
 body {
-    background-color: #4bb5d9ff;
+    background-color: #3796bfff;
     color: white;
     margin-left: 50px;
     margin-top: 20px;
@@ -7,24 +7,22 @@ body {
   }
 
 title {
-font-size: 36px;
+font-size: 32px;
 }
 
 .cat {
-  font-size: 20pt;
+  font-size: 16pt;
 }
 .dd {
-  color: white;
-  background-color: #3796bfff;
+  color: #3796bfff;
+  background-color: white;
   font-size: 14pt;
-  
-
 }
 
 select {
-  background-color:#3796bfff;
-  color:white;
-  font-size: 20pt;
+  background-color:white;
+  color:#3796bfff;
+  font-size: 16pt;
 
 }
 
@@ -34,10 +32,13 @@ select {
 }
 
 .compensation {
-  font-size: 24pt;
+  font-size: 22pt;
 }
 
 .button {
   font-family: 'Roboto', sans-serif;
-  font-size: 14pt;
+  font-size: 12pt;
+  /* width: 20em;  height: 2em; */
+  background-color: orange;
+  color: white;
 }

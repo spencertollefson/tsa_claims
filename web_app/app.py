@@ -38,7 +38,7 @@ def do_prediction_multiple_days():
     data = request.json
     data['Month_inc_date'] = month_dictionary[data['Month_inc_date']]
 
-    response = make_prediction_over_n_days(data, 60)
+    response = make_prediction_over_n_days(data, 50)
 
     return jsonify(response)
 
@@ -46,11 +46,11 @@ def do_prediction_multiple_days():
 @app.route('/', methods=['GET'])
 def dropdown():
     featuredir = './featurelists'
-    airports = joblib.load(f'{featuredir}/airports.joblib')
-    airlines = joblib.load(f'{featuredir}/airlines.joblib')
-    claim_types = joblib.load(f'{featuredir}/claim_types.joblib')
-    claim_sites = joblib.load(f'{featuredir}/claim_sites.joblib')
-    item_cats = joblib.load(f'{featuredir}/item_category.joblib')
+    airports = sorted(joblib.load(f'{featuredir}/airports.joblib'))
+    airlines = sorted(joblib.load(f'{featuredir}/airlines.joblib'))
+    claim_types = sorted(joblib.load(f'{featuredir}/claim_types.joblib'))
+    claim_sites = sorted(joblib.load(f'{featuredir}/claim_sites.joblib'))
+    item_cats = sorted(joblib.load(f'{featuredir}/item_category.joblib'))
     days = list(range(1, 61))
     months = ['January', 'February', 'March', 'April', 'May', 'June',
               'July', 'August', 'September', 'October', 'November', 'December']
