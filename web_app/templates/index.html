@@ -1,17 +1,99 @@
 <html>
-<head><title>TSA CLAIM PREDICTOR</title>
-
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<head>
+  <title>TSA Claim Outcome Prediction</title>
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js">script></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+
+
 </head>
 
 
 <body>
-<h1>TSA CLAIM PREDICTOR</h1>
-<br>
+<h1 class="title">TSA Claim Outcome Prediction</h1>
 
-Airport:
+<hr>
+
+<table class="tabsettings">
+    <tr>
+      <td>
+          <div class="cat">Airport:</div>
+      </td>
+      <td>
+          <select class="dd" name = airports method="GET" action="/">
+            {% for airport in airports %}
+            <option value= "{{airport}}" SELECTED>{{ airport }}</option>"
+            {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="cat">Airline:</div>
+        </td>
+        <td>
+            <select class="dd" name = airlines method="GET" action="/">
+              {% for airline in airlines %}
+              <option value= "{{airline}}" SELECTED>{{ airline }}</option>"
+              {% endfor %}
+          </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="cat">Claim Type:</div>
+        </td>
+        <td>
+            <select class="dd" name = claim_types method="GET" action="/">
+              {% for claim_type in claim_types %}
+              <option value= "{{claim_type}}" SELECTED>{{ claim_type }}</option>"
+              {% endfor %}
+          </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="cat">Location of Incident:</div>
+        </td>
+        <td>
+            <select class="dd" name = claim_sites method="GET" action="/">
+              {% for claim_site in claim_sites %}
+              <option value= "{{claim_site}}" SELECTED>{{ claim_site }}</option>"
+              {% endfor %}
+          </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="cat">Item Category:</div>
+        </td>
+        <td>
+            <select class="dd" name = item_cats method="GET" action="/">
+              {% for item_cat in item_cats %}
+              <option value= "{{item_cat}}" SELECTED>{{ item_cat }}</option>"
+              {% endfor %}
+          </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="cat">Month Incident Occurred:</div>
+        </td>
+        <td>
+            <select class="dd" name = months method="GET" action="/">
+              {% for month in months %}
+              <option value= "{{month}}" SELECTED>{{ month }}</option>"
+              {% endfor %}
+          </select>
+        </td>
+    </tr>
+</table>
+
+
+<!-- <div class="cat">Airport:</div>
   <select name = airports method="GET" action="/">
       {% for airport in airports %}
       <option value= "{{airport}}" SELECTED>{{ airport }}</option>"
@@ -19,7 +101,7 @@ Airport:
   </select>
 
 <br>
-Airline:
+<div class="cat">Airline:</div> 
   <select name = airlines method="GET" action="/">
       {% for airline in airlines %}
       <option value= "{{airline}}" SELECTED>{{ airline }}</option>"
@@ -27,7 +109,8 @@ Airline:
   </select>
 <br>
 
-Claim Type:
+
+<div class="cat">Claim Type:</div>
   <select name = claim_types method="GET" action="/">
       {% for claim_type in claim_types %}
       <option value= "{{claim_type}}" SELECTED>{{ claim_type }}</option>"
@@ -35,7 +118,8 @@ Claim Type:
   </select>
 <br>
 
-Location of Incident:
+
+<div class="cat">Location of Incident:</div>  
   <select name = claim_sites method="GET" action="/">
       {% for claim_site in claim_sites %}
       <option value= "{{claim_site}}" SELECTED>{{ claim_site }}</option>"
@@ -43,7 +127,8 @@ Location of Incident:
   </select>
 <br>
 
-Item Category:
+
+<div class="cat">Item Category:</div>
   <select name = item_cats method="GET" action="/">
       {% for item_cat in item_cats %}
       <option value= "{{item_cat}}" SELECTED>{{ item_cat }}</option>"
@@ -51,46 +136,46 @@ Item Category:
   </select>
 <br>
 
-Month of incident date:
+
+<div class="cat">Month Incident Occurred</div>
   <select name = months method="GET" action="/">
       {% for month in months %}
       <option value= "{{month}}" SELECTED>{{ month }}</option>"
       {% endfor %}
-  </select>
+  </select> -->
 
-
+<hr>
 <br>
-
   <div>
-    <button id="submit">Make prediction</button>
+    <button class="button" id="submit">Make prediction</button>
+    <br>
+    <br>
       <table>
-    <tr><td>Probability is: </td>
-        <td id="hard_predict"></td></tr>
+    <tr><td class = "compensation"></td>
+        <bold><td class="compensation" id="hard_predict"></td></bold>
+        
+      </tr>
   </table>
   </div>
 <br>
 
 
-<div class="charts text-center">
-        <div class="row"><div id="line"></div></div><hr>
-        <!-- Placeholder for the tooltip -->
-        <div id="vis-tooltip" class="vg-tooltip"></div>
-</div>
+<br>
+<div id="vis"></div>
 
 </body>
+
+
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://d3js.org/d3.v3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.30/vega.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.2/vega-lite.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.14/vega-embed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>  
+  <script src="https://vega.github.io/datalib/datalib.min.js"></script>
+  <script src="static/js/plot.js"></script>
 
-    <script src="https://vega.github.io/datalib/datalib.min.js"></script>
-
-    <!-- Vega Tooltip -->
-    <script src="https://vega.github.io/vega-tooltip/vega-tooltip.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://vega.github.io/vega-tooltip/vega-tooltip.css">
   <script>
-
   $('#submit').click( () => { cool(); } );
 
   function cool(){
@@ -105,50 +190,20 @@ Month of incident date:
     }
     console.log(features);
 
-     {#var opt = {#}
-     {#     mode: "vega-lite",#}
-     {#     renderer: "svg",#}
-     {#     actions: {export: true, source: false, editor: false}#}
-     {#   };#}
 
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/predict",  // Replace with URL of POST handler
+      url: "/predict_multiple",  // Replace with URL of POST handler
       dataType: "json",
       async: true,
       data: JSON.stringify(features),
-      success: (result) => {
-        $('#hard_predict').html(result);
-      },
+      success: (result) => processResult(result),
       error: (result) => {
         alert('I dunno what you did');
       }
-    })
+    });
 
   }
-
   </script>
-
-
-
-
-{##}
-{#<!-- Render Charts -->#}
-{#    <script type="text/javascript">#}
-{#      function parse(url, div) {#}
-{#        var opt = {#}
-{#          mode: "vega-lite",#}
-{#          renderer: "svg",#}
-{#          actions: {export: true, source: false, editor: false}#}
-{#        };#}
-{#        vega.embed("#"+div, url, opt, function(error, result) {#}
-{#          // result.view is the Vega View, url is the original Vega-Lite specification#}
-{#          vegaTooltip.vegaLite(result.view, url);#}
-{#        });#}
-{#      }#}
-{##}
-{#      parse("/data/line", "line");#}
-{#    </script>#}
-
 </html>

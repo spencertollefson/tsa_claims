@@ -1,0 +1,43 @@
+body {
+    background-color: #4bb5d9ff;
+    color: white;
+    margin-left: 50px;
+    margin-top: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+title {
+font-size: 36px;
+}
+
+.cat {
+  font-size: 20pt;
+}
+.dd {
+  color: white;
+  background-color: #3796bfff;
+  font-size: 14pt;
+  
+
+}
+
+select {
+  background-color:#3796bfff;
+  color:white;
+  font-size: 20pt;
+
+}
+
+
+.tabsettings {
+  line-height: 2;
+}
+
+.compensation {
+  font-size: 24pt;
+}
+
+.button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14pt;
+}
