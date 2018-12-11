@@ -51,7 +51,7 @@ I used Area Under a ROC Curve as my metric of choice since I made my problem int
 
 ---
 
-To deploy the model I utilized the Flask library to create a simple JavaScript and HTML rendering. This allows users to input the features for their unique TSA case, and see a plot showing them the probability of filing a successful claim depending on how many days they wait after the incident to file.
+To deploy the model I utilized the Flask library to create a JavaScript and HTML rendering. The rendering incorporates the Vega plotting system to make a visual line plot once the features for the model have been selected by user. This allows users to input the features for their unique TSA case, and see a plot showing them the probability of filing a successful claim depending on how many days they wait after the incident to file.
 
 # What I would do differently
 
@@ -64,26 +64,10 @@ Learning JavaScript better and how to use that information with Python would hel
 
 ## Appendix
 
-
-### Repository Organization
-
-| Name | Description
------- | ------------
-`combine_and_clean_data.ipynb` | Inputs raw TSA Claims .csv files and performs cleaning and formatting. Saves files as .pkl in `/data/clean`.
-`pdf_to_csvs.ipynb` | Inputs the raw 2016 and 2017 data files from TSA that are in the PDF format and converts them into CSV files which are stored in `/data/raw`.
-`plot.ipynb` | Creates all plots used in presentation and blog post.
-`data/` | Directory contains raw and cleaned data.
-`images/` | Includes images and video used to represent data and demonstrate Flask app implementation
-`legacy` | Code that was used in early analysis to had down a few different paths, but ultimately not implemented in final models or plot s. This is messy and unfinished.
-`models/` | This folder contains best version of all classifying models created (SK-Learn) pickled in `.joblib` format. Also contains `/transformers/` folder, which has fit models ready to transform input to use with model for `web_app` purposes.
-`reports/` | Contains original proposal, summary of project, and presenation slides for the project.
-`web_app/` | Contains code to execute Flask app.
-`utils.py` | Contains some larger functions used in the notebooks.
-
 ### Dataset Features
 
-claim_number | date_received     | incident_date | airport_code | airport_name | airline_name | claim_type | claim_site | item | claim_amount | status | close_amount | disposition
+claim_number | date_received     | incident_date | airport_code | airport_name | airline_name | claim_type | claim_site | item | status | close_amount | disposition
 ------------ | -------- | ------------ | ----------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | ---------
-string       | datetime | datetime          | string      | string     | string     | string     | string | string | integer | string | integer | string
+string       | datetime | datetime          | string      | string     | string     | string     | string | string | string | integer | string
 
 -----
